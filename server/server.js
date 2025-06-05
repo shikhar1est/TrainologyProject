@@ -14,7 +14,7 @@ await connectDB()
 app.use(cors())
 
 // Use raw body only for Clerk webhooks
-app.post('/clerk', express.json(), clerkWebHooks)
+app.post('/clerk', express.raw({ type: "application/json" }), clerkWebHooks)
 
 
 // You can use express.json() for all other routes *after* the webhook
