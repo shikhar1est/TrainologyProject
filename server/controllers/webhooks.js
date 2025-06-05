@@ -11,7 +11,6 @@ export const clerkWebHooks=async (req,res)=>{
             "svix-id":req.headers["svix-id"],
             "svix-timestamp":req.headers["svix-timestamp"]
          })
-
          const {data,type}=req.body
       console.log("Request body",req.body)
          switch (type) {
@@ -25,7 +24,7 @@ export const clerkWebHooks=async (req,res)=>{
                 await User.create(userData)
                 res.json({})
                 break;
-            }
+                }
                 case 'user.updated' : {
                     const userData={
                     email:data.email_addresses[0].email_address,
@@ -36,13 +35,11 @@ export const clerkWebHooks=async (req,res)=>{
                 res.json({})
                 break;
                 }
-
                 case 'user.deleted' : {
                     await User.findByIdAndDelete(data.id)
                     res.json({})
                     break
                 }
-         
             default:
                 break;
          }
