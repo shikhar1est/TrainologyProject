@@ -21,7 +21,7 @@ app.post('/clerk', express.json(), clerkWebHooks)
 app.use(express.json())
 
 // Basic test route
-app.get('/', (req, res) => res.send("API working"))
+app.get('/', (req, res) => res.send("API working BC"))
 
 // Start server
 const PORT = process.env.PORT || 5000
