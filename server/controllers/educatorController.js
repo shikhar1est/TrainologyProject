@@ -20,7 +20,7 @@ export const updateRoleToEducator=async(req,res)=>{
 //Add new course
 export const addCourse=async(req,res)=>{
     try {
-        const {coourseData} =req.body
+        const {courseData} =req.body
         const imageFile=req.file
         const educatorId=req.auth.userId
 
@@ -42,3 +42,16 @@ export const addCourse=async(req,res)=>{
         
     }
 }
+
+// Get Eeducator Courses
+export const getEducatorCourses = async(req,res)=>{
+    try {
+        const educator=req.auth.userId
+        const courses=await Course.find({educator})
+        res.json({success : true, courses})
+    } catch (error) {
+        res.json({success : false,message : error.message})
+    }
+}
+
+//Get Educator Dashboard data
