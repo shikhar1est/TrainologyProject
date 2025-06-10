@@ -12,7 +12,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.31.6",
     "axios": "^1.9.0",
-    "humanize-duration": "^3.32.2",
+    "humanize-duration": "^3.33.0",
     "quill": "^2.0.3",
     "rc-progress": "^4.0.0",
     "react": "^19.1.0",
