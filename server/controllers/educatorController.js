@@ -1,6 +1,8 @@
 import {clerkClient} from '@clerk/express'
 import {v2 as cloudinary} from 'cloudinary'
 import Course from '../models/Course.js'
+import { Purchase } from "../models/Purchase.js";
+import User from '../models/User.js'
 
 //Update Role to Educator
 export const updateRoleToEducator=async(req,res)=>{
@@ -55,7 +57,7 @@ export const getEducatorCourses = async(req,res)=>{
 }
 
 //Get Educator Dashboard data
-export const educatorDashboardData= async()=>{
+export const educatorDashboardData= async(req,res)=>{
     try {
         const educator=req.auth.userId
         const courses=await Course.find({educator})
@@ -64,7 +66,7 @@ export const educatorDashboardData= async()=>{
         const courseIds = courses.map(course=> course._id)
 
         const purchases= await Purchase.find({
-            courseId:{$in,courseIds},
+            courseId:{$in : courseIds},
             status: 'completed'
         });
         const totalEarnings=purchases.reduce((sum,purchase)=>sum + purchase.amount,0);
@@ -97,7 +99,7 @@ export const getEnrolledStudentsData=async(req,res)=>{
          const courseIds = courses.map(course=> course._id)
 
           const purchases= await Purchase.find({
-            courseId:{$in,courseIds},
+            courseId:{$in : courseIds},
             status: 'completed'
         }).populate('userId','name imageUrl').populate('courseId','courseTitle')
 
